@@ -1,24 +1,20 @@
 local Dumpster = {} do
 	Dumpster.__index = Dumpster
 
-	local finalizers = setmetatable(
-		{
-			["function"] = function(item)
-				return item()
-			end,
-			["Instance"] = function(item)
-				return item:Destroy()
-			end,
-			["RBXScriptConnection"] = function(item)
-				return item:Disconnect()
-			end,
-		},
-		{
-			__index = function(self, className)
-				error(("Can't dump item of type '%s'"):format(className), 3)
-			end,
-		}
-	)
+	local finalizers = {
+		["function"] = function(item)
+			item()
+		end,
+		["Instance"] = function(item)
+			item:Destroy()
+		end,
+		["RBXScriptConnection"] = function(item)
+			item:Disconnect()
+		end,
+		["table"] = function(item)
+			item:destroy()
+		end
+	}
 
 	function Dumpster.new()
 		return setmetatable({}, Dumpster)
