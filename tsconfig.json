@@ -8,11 +8,10 @@
 		"noLib": true,
 		"strict": true,
 		"target": "es6",
-		"typeRoots": [ "node_modules/@rbxts" ],
+		"typeRoots": ["node_modules/@rbxts"],
 
 		// required, configurable
-		"rootDir": "src",
-		"outDir": "out",
+		"rootDir": ".",
 
 		// optional
 		"baseUrl": "src",
