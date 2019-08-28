@@ -24,8 +24,8 @@ local Dumpster = {} do
 		return setmetatable({}, Dumpster)
 	end
 
-	function Dumpster:dump(item)
-		self[item] = finalizers[typeof(item)]
+	function Dumpster:dump(item, finalizer)
+		self[item] = finalizer or finalizers[typeof(item)]
 	end
 
 	function Dumpster:burn()
