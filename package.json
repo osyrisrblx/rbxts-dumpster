@@ -1,0 +1,18 @@
+{
+	"name": "@rbxts/dumpster",
+	"version": "1.0.0",
+	"description": "",
+	"main": "Dumpster.lua",
+	"types": "Dumpster.d.ts",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"private": false,
+	"devDependencies": {
+		"@rbxts/types": "^1.0.253"
+	},
+	"files": [
+		"Dumpster.lua",
+		"Dumpster.d.ts"
+	]
+}
