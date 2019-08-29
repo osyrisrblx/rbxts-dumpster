@@ -23,3 +23,22 @@ dumpster.dump(() => print("Cleaned!"));
 // later..
 dumpster.burn();
 ```
+You can optionally pass a custom handler function to override the default callback (which is normally chosen using the `typeof` function). This is especially handy for custom classes:
+```TS
+class Obj {
+	remove() {}
+}
+
+dumpster.dump(new Obj(), obj => obj.remove());
+
+// You can also pattern your classes as having a static destructor member
+class Item {
+	static destructor(item: B) {
+		item.remove();
+	}
+	remove() {}
+}
+
+// Then re-use the same callback for every cleanup
+dumpster.dump(new Item(), Item.destructor);
+```
