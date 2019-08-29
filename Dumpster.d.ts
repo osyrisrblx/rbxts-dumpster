@@ -27,7 +27,7 @@ interface Dumpster {
 
 	/**
 	 * Cleans all items.
-	 * @alias destroy
+	 * @alias burn
 	 */
 	destroy(): void;
 }
