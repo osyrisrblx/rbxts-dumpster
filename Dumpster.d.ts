@@ -1,4 +1,6 @@
-type Destroyable = { destroy(): void } | { Destroy(): void };
+interface Destroyable {
+	destroy(): void;
+}
 
 /** A cleanup object into which items (Instances, Connections, etc) can be dumped and later burned.
  * @author fractality
@@ -9,6 +11,7 @@ interface Dumpster {
 	 * @param item The function to call, instance to destroy, or connection to disconnect.
 	 */
 	dump(item: Function | Instance | RBXScriptConnection | Destroyable): this;
+	dump(item: { Destroy(): void }): this;
 
 	/**
 	 * Adds `item` to the dumpster. Will be cleaned up on `Dumpster.burn` by the `burner` callback.
