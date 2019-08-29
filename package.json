@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/dumpster",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "Dumpster.lua",
 	"types": "Dumpster.d.ts",
@@ -13,6 +13,7 @@
 	},
 	"files": [
 		"Dumpster.lua",
-		"Dumpster.d.ts"
+		"Dumpster.d.ts",
+		"README.md"
 	]
 }

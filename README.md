@@ -20,6 +20,10 @@ dumpster.dump(RunService.Stepped.Connect(() => print("Step!")));
 // Function
 dumpster.dump(() => print("Cleaned!"));
 
+// User created class with `.destroy()`
+class Foo { destroy() {} }
+dumpster.dump(new Foo());
+
 // later..
 dumpster.burn();
 ```
