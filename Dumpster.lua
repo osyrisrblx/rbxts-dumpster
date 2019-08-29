@@ -36,7 +36,6 @@ local Dumpster = {} do
 			self[item] = nil
 			item, finalizer = next(self)
 		end
-		return self
 	end
 
 	Dumpster.destroy = Dumpster.burn
