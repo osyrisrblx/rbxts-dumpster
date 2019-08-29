@@ -45,4 +45,5 @@ class Item {
 
 // Then re-use the same callback for every cleanup
 dumpster.dump(new Item(), Item.destructor);
+dumpster.dump(new Item(), Item.destructor);
 ```
