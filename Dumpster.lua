@@ -25,10 +25,12 @@ local Dumpster = {} do
 	end
 
 	function Dumpster:burn()
-		for item, finalizer in pairs(self) do
-			finalizer(item)
-			self[item] = nil
-		end
+		repeat
+			for item, finalizer in pairs(self) do
+				finalizer(item)
+				self[item] = nil
+			end
+		until next(self) == nil
 	end
 end
 
