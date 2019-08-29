@@ -12,7 +12,11 @@ local Dumpster = {} do
 			item:Disconnect()
 		end,
 		["table"] = function(item)
-			item:destroy()
+			if item.destroy then
+				item:destroy()
+			elseif item.burn then
+				item:burn()
+			end
 		end
 	}
 
@@ -22,14 +26,20 @@ local Dumpster = {} do
 
 	function Dumpster:dump(item, finalizer)
 		self[item] = finalizer or finalizers[typeof(item)]
+		return self
 	end
 
 	function Dumpster:burn()
-		for item, finalizer in pairs(self) do
+		local item, finalizer = next(self)
+		while item ~= nil do
 			finalizer(item)
 			self[item] = nil
+			item, finalizer = next(self)
 		end
+		return self
 	end
+
+	Dumpster.destroy = Dumpster.burn
 end
 
 return Dumpster
