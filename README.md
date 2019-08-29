@@ -26,9 +26,11 @@ dumpster.dump(new Foo());
 
 // later..
 dumpster.burn();
-```
-You can optionally pass a custom handler function to override the default callback (which is normally chosen using the `typeof` function). This is especially handy for custom classes:
-```TS
+
+// You can optionally pass a custom handler function to override the default callback
+// (which is normally chosen using the `typeof` function).
+// This is especially handy for custom classes:
+
 class Obj {
 	remove() {}
 }
