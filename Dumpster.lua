@@ -14,8 +14,8 @@ local Dumpster = {} do
 		["table"] = function(item)
 			if item.destroy then
 				item:destroy()
-			elseif item.burn then
-				item:burn()
+			elseif item.Destroy then
+				item:Destroy()
 			end
 		end
 	}
