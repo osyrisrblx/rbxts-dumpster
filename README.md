@@ -37,7 +37,7 @@ dumpster.dump(new Obj(), obj => obj.remove());
 
 // You can also pattern your classes as having a static destructor member
 class Item {
-	static destructor(item: B) {
+	static destructor(item: Item) {
 		item.remove();
 	}
 	remove() {}
