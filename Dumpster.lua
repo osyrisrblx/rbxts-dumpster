@@ -1,3 +1,5 @@
+local DESTROY_METHODS = { "destroy", "Destroy", "Disconnect" }
+
 local Dumpster = {} do
 	Dumpster.__index = Dumpster
 
@@ -12,10 +14,10 @@ local Dumpster = {} do
 			item:Disconnect()
 		end,
 		["table"] = function(item)
-			if item.destroy then
-				item:destroy()
-			elseif item.Destroy then
-				item:Destroy()
+			for _, methodName in ipairs(DESTROY_METHODS) do
+				if item[methodName] then
+					item[methodName](item)
+				end
 			end
 		end
 	}
