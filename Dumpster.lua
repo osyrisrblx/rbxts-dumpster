@@ -43,4 +43,6 @@ local Dumpster = {} do
 	Dumpster.destroy = Dumpster.burn
 end
 
-return Dumpster
+return {
+	Dumpster
+}
