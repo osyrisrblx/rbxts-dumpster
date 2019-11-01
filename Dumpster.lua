@@ -44,5 +44,5 @@ local Dumpster = {} do
 end
 
 return {
-	Dumpster
+	Dumpster = Dumpster
 }
