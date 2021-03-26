@@ -3,46 +3,41 @@ local DESTROY_METHODS = { "destroy", "Destroy", "Disconnect" }
 local Dumpster = {} do
 	Dumpster.__index = Dumpster
 
-	local finalizers = {
+	local finalizers = setmetatable({
 		["function"] = function(item)
-			item()
+			return item()
 		end,
-		["Instance"] = function(item)
-			item:Destroy()
-		end,
-		["RBXScriptConnection"] = function(item)
-			item:Disconnect()
-		end,
+		["Instance"] = game.Destroy,
+		["RBXScriptConnection"] = Instance.new("BindableEvent").Event:Connect(function()
+		end).Disconnect,
 		["table"] = function(item)
 			for _, methodName in ipairs(DESTROY_METHODS) do
 				if item[methodName] then
 					item[methodName](item)
 				end
 			end
-		end
-	}
+		end,
+	}, {
+		__index = function(self, className)
+			error(("Can't dump item of type '%s'"):format(className), 3)
+		end,
+	})
 
 	function Dumpster.new()
 		return setmetatable({}, Dumpster)
 	end
 
-	function Dumpster:dump(item, finalizer)
-		self[item] = finalizer or finalizers[typeof(item)]
-		return self
+	function Dumpster:dump(item)
+		self[item] = finalizers[typeof(item)]
+		return item
 	end
 
 	function Dumpster:burn()
-		local item, finalizer = next(self)
-		while item ~= nil do
+		for item, finalizer in pairs(self) do
 			finalizer(item)
-			self[item] = nil
-			item, finalizer = next(self)
 		end
+		table.clear(self)
 	end
-
-	Dumpster.destroy = Dumpster.burn
 end
 
-return {
-	Dumpster = Dumpster
-}
+return Dumpster
