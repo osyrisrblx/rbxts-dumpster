@@ -38,6 +38,8 @@ local Dumpster = {} do
 		end
 		table.clear(self)
 	end
+
+	Dumpster.destroy = Dumpster.burn
 end
 
 return Dumpster
